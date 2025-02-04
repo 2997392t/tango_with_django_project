@@ -22,6 +22,15 @@
         {% else %}
             The specified category does not exist.
         {% endif %}
+
+        {% if category %}
+            <h1>{{ category.name }}</h1>
+            <p>{{ category.views }} views | {{ category.likes }} likes</p>
+
+            <a href="/rango/category/{{ category.slug }}/add_page/">Add Page</a> <br/>
+            {% else %}
+            <p>The specified category does not exist.</p>
+            {% endif %}
     </div>
 </body>
 
