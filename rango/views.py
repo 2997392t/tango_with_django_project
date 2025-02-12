@@ -20,6 +20,10 @@ def index(request):
     # Retrieve the top 5 only -- or all if less than 5.
     # Place the list in our context_dict dictionary (with our boldmessage!)
     # that will be passed to the template engine.
+
+    request.session.set_test_cookie()
+
+
     category_list = Category.objects.order_by('-likes')[:5]
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
@@ -32,6 +36,11 @@ def index(request):
     return render(request, 'rango/index.html', context=context_dict)
 
 def about(request):
+
+    if request.session.test_cookie_worked():
+        print("TEST COOKIE WORKED!")
+        request.session.delete_test_cookie()
+
     # prints out whether the method is a GET or a POST
     print(request.method)
     # prints out the user name, if no one is logged in it prints `AnonymousUser`
